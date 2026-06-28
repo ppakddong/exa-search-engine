@@ -1,22 +1,12 @@
-import os
+from src.search import search
+from src.display import print_results
 
-from dotenv import load_dotenv
-from exa_py import Exa
+print("=" * 50)
+print("AI Search Engine")
+print("=" * 50)
 
-load_dotenv()
-print(os.getenv("EXA_API_KEY")) 
-exa = Exa(os.getenv("EXA_API_KEY"))
+query = input("검색어를 입력하세요 : ")
 
-query = input("Search here: ")
+results = search(query)
 
-response = exa.search(
-    query,
-    num_results=5,
-    type="keyword",
-    include_domains=["https://www.tiktok.com"],
-)
-
-for result in response.results:
-    print(f"Title: {result.title}")
-    print(f"URL: {result.url}")
-    print()
+print_results(results)
